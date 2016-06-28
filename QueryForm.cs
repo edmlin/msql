@@ -21,8 +21,8 @@ namespace msql
 	{
 		string db,user,password;
 		DataTable dt=new DataTable();
-		OracleDataAdapter da;
-		OracleConnection conn;
+		System.Data.OracleClient.OracleDataAdapter da;
+		System.Data.OracleClient.OracleConnection conn;
 		public QueryForm()
 		{
 			//
@@ -45,7 +45,7 @@ namespace msql
 			}
 			tbSql.Text=sql;
 			Text=Text+" - "+db;
-			conn=new OracleConnection(String.Format("Data Source={0};User Id={1};Password={2}",db,user,password));
+			conn=new System.Data.OracleClient.OracleConnection(String.Format("Data Source={0};User Id={1};Password={2}",db,user,password));
 			Show();
 			btRun.PerformClick();
 		}
@@ -63,7 +63,7 @@ namespace msql
 			{
 				if(conn.State!=ConnectionState.Open) conn.Open();
 				if(da!=null) da.Dispose();
-				da=new OracleDataAdapter(sql,conn);
+				da=new System.Data.OracleClient.OracleDataAdapter(sql,conn);
 				dt.Clear();
 				dt.Columns.Clear();
 				da.Fill((int)((numPage.Value-1)*numRecords.Value),(int)numRecords.Value,dt);

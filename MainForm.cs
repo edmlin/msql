@@ -168,16 +168,16 @@ namespace msql
 				sql=sql.Trim().Substring(0,sql.Trim().Length-1);
 			}
 			if(sql=="") return "";
-			using(OracleConnection conn = new OracleConnection(oradb))
+			using(System.Data.OracleClient.OracleConnection conn = new System.Data.OracleClient.OracleConnection(oradb))
 			{
 				try
 				{
 					conn.Open();
-					using(OracleCommand cmd=conn.CreateCommand())
+					using(System.Data.OracleClient.OracleCommand cmd=conn.CreateCommand())
 					{
-						cmd.BindByName=true;
+						//cmd.BindByName=true;
 						cmd.CommandText=sql;
-						OracleDataReader dr=cmd.ExecuteReader();
+						System.Data.OracleClient.OracleDataReader dr=cmd.ExecuteReader();
 						string[] fields=new string[dr.FieldCount];
 						if(dr.Read())
 						{
