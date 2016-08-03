@@ -367,12 +367,29 @@ namespace msql
 		}
 		void DataGridView1CellDoubleClick(object sender, DataGridViewCellEventArgs e)
 		{
+			if(e.RowIndex < 0) return;
 			DataRow row=dt.DefaultView[e.RowIndex].Row;
 			string db=row["InstanceName"].ToString();
 			string user=row["User"].ToString();
 			string password=row["RealPassword"].ToString();
 			QueryForm qf=new QueryForm();
 			qf.Run(db,user,password,tbSql.Text);
+		}
+		void BtReloadClick(object sender, EventArgs e)
+		{
+			MainFormLoad(null,null);
+		}
+		void CmDeleteOpening(object sender, System.ComponentModel.CancelEventArgs e)
+		{
+			e.Cancel = dataGridView1.SelectedRows.Count <= 0;
+		}
+		void DeleteToolStripMenuItemClick(object sender, EventArgs e)
+		{
+			foreach(DataGridViewRow row in dataGridView1.SelectedRows)
+			{
+				(row.DataBoundItem as DataRowView).Row.Delete();
+			}
+			ShowRowIndex();
 		}
 
 	}

@@ -66,6 +66,7 @@ namespace msql
 				da=new System.Data.OracleClient.OracleDataAdapter(sql,conn);
 				dt.Clear();
 				dt.Columns.Clear();
+				dt.DefaultView.Sort="";
 				da.Fill((int)((numPage.Value-1)*numRecords.Value),(int)numRecords.Value,dt);
 				dataGridView1.DataSource=dt;
 			}
