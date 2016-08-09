@@ -15,6 +15,7 @@ using System.Data.Common;
 using Oracle.ManagedDataAccess.Client; // ODP.NET Oracle managed provider 
 using Oracle.ManagedDataAccess.Types; 
 using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace msql
 {
@@ -115,6 +116,9 @@ namespace msql
 			{
 				sql=sql.Trim().Substring(0,sql.Trim().Length-1);
 			}
+			
+			if(Regex.Match(sql.ToLower(),"\\send$").Success) sql+=";";
+			
 			tbSql.Text=sql;
 			if(sql=="") return;
 
@@ -163,10 +167,7 @@ namespace msql
 		{
 			string oradb = String.Format("Data Source={0};User Id={1};Password={2}",db,user,password);
 			string result="";
-			while(sql.Trim().EndsWith(";"))
-			{
-				sql=sql.Trim().Substring(0,sql.Trim().Length-1);
-			}
+
 			if(sql=="") return "";
 			using(System.Data.OracleClient.OracleConnection conn = new System.Data.OracleClient.OracleConnection(oradb))
 			{
@@ -176,7 +177,7 @@ namespace msql
 					using(System.Data.OracleClient.OracleCommand cmd=conn.CreateCommand())
 					{
 						//cmd.BindByName=true;
-						cmd.CommandText=sql;
+						cmd.CommandText=sql.Replace("\r\n","\n");
 						System.Data.OracleClient.OracleDataReader dr=cmd.ExecuteReader();
 						string[] fields=new string[dr.FieldCount];
 						if(dr.Read())
