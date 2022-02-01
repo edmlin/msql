@@ -80,22 +80,26 @@ namespace msql
 				row["Selected"]=cbSelectAll.Checked;
 			}
 		}
+		void UpdateSelectAllCheckBox()
+		{
+			bool allSelected=true;
+			bool noneSelected=true;
+			foreach(DataRow row in dt.Rows)
+			{
+				allSelected=allSelected && (bool)row["Selected"];
+				noneSelected=noneSelected && !(bool)row["Selected"];
+				if(!allSelected && !noneSelected) break;
+			}
+			if(allSelected) cbSelectAll.CheckState=CheckState.Checked;
+			else if(noneSelected) cbSelectAll.CheckState=CheckState.Unchecked;
+			else cbSelectAll.CheckState=CheckState.Indeterminate;
+		}
 		void DataGridView1CellValueChanged(object sender, DataGridViewCellEventArgs e)
 		{
 			if(e.ColumnIndex<0) return;
 			if(dataGridView1.Columns[e.ColumnIndex].Name=="Selected")
 			{
-				bool allSelected=true;
-				bool noneSelected=true;
-				foreach(DataRow row in dt.Rows)
-				{
-					allSelected=allSelected && (bool)row["Selected"];
-					noneSelected=noneSelected && !(bool)row["Selected"];
-					if(!allSelected && !noneSelected) break;
-				}
-				if(allSelected) cbSelectAll.CheckState=CheckState.Checked;
-				else if(noneSelected) cbSelectAll.CheckState=CheckState.Unchecked;
-				else cbSelectAll.CheckState=CheckState.Indeterminate;
+				UpdateSelectAllCheckBox();
 			}
 		}
 		void DataGridView1CurrentCellDirtyStateChanged(object sender, EventArgs e)
@@ -391,6 +395,17 @@ namespace msql
 				(row.DataBoundItem as DataRowView).Row.Delete();
 			}
 			ShowRowIndex();
+		}
+		void BtUncheckErrorClick(object sender, EventArgs e)
+		{
+			foreach(DataRow row in dt.Rows)
+			{
+				if(row["Result"].ToString().StartsWith("Error:"))
+				{
+			   		row["Selected"]=false;
+				}
+			}
+			UpdateSelectAllCheckBox();
 		}
 
 	}

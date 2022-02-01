@@ -39,6 +39,7 @@ namespace msql
 		private System.Windows.Forms.Button btReload;
 		private System.Windows.Forms.ContextMenuStrip cmDelete;
 		private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+		private System.Windows.Forms.Button btUncheckError;
 		
 		/// <summary>
 		/// Disposes resources used by the form.
@@ -86,6 +87,7 @@ namespace msql
 			this.groupBox1 = new System.Windows.Forms.GroupBox();
 			this.tbSql = new System.Windows.Forms.TextBox();
 			this.splitContainer1 = new System.Windows.Forms.SplitContainer();
+			this.btUncheckError = new System.Windows.Forms.Button();
 			this.panel1.SuspendLayout();
 			this.panel2.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)(this.nThreads)).BeginInit();
@@ -100,6 +102,7 @@ namespace msql
 			// 
 			// panel1
 			// 
+			this.panel1.Controls.Add(this.btUncheckError);
 			this.panel1.Controls.Add(this.btReload);
 			this.panel1.Controls.Add(this.cbShowPassword);
 			this.panel1.Controls.Add(this.btNext);
@@ -121,7 +124,7 @@ namespace msql
 			// 
 			// btReload
 			// 
-			this.btReload.Location = new System.Drawing.Point(752, 9);
+			this.btReload.Location = new System.Drawing.Point(777, 9);
 			this.btReload.Name = "btReload";
 			this.btReload.Size = new System.Drawing.Size(88, 23);
 			this.btReload.TabIndex = 12;
@@ -131,7 +134,7 @@ namespace msql
 			// 
 			// cbShowPassword
 			// 
-			this.cbShowPassword.Location = new System.Drawing.Point(437, 10);
+			this.cbShowPassword.Location = new System.Drawing.Point(481, 9);
 			this.cbShowPassword.Name = "cbShowPassword";
 			this.cbShowPassword.Size = new System.Drawing.Size(104, 24);
 			this.cbShowPassword.TabIndex = 11;
@@ -142,7 +145,7 @@ namespace msql
 			// 
 			// btNext
 			// 
-			this.btNext.Location = new System.Drawing.Point(711, 8);
+			this.btNext.Location = new System.Drawing.Point(748, 8);
 			this.btNext.Name = "btNext";
 			this.btNext.Size = new System.Drawing.Size(24, 23);
 			this.btNext.TabIndex = 10;
@@ -153,7 +156,7 @@ namespace msql
 			// 
 			// btPrev
 			// 
-			this.btPrev.Location = new System.Drawing.Point(681, 8);
+			this.btPrev.Location = new System.Drawing.Point(718, 8);
 			this.btPrev.Name = "btPrev";
 			this.btPrev.Size = new System.Drawing.Size(24, 23);
 			this.btPrev.TabIndex = 9;
@@ -164,7 +167,7 @@ namespace msql
 			// 
 			// tbFind
 			// 
-			this.tbFind.Location = new System.Drawing.Point(575, 10);
+			this.tbFind.Location = new System.Drawing.Point(612, 10);
 			this.tbFind.Name = "tbFind";
 			this.tbFind.Size = new System.Drawing.Size(100, 20);
 			this.tbFind.TabIndex = 8;
@@ -173,7 +176,7 @@ namespace msql
 			// 
 			// label5
 			// 
-			this.label5.Location = new System.Drawing.Point(547, 13);
+			this.label5.Location = new System.Drawing.Point(584, 13);
 			this.label5.Name = "label5";
 			this.label5.Size = new System.Drawing.Size(36, 23);
 			this.label5.TabIndex = 7;
@@ -181,7 +184,7 @@ namespace msql
 			// 
 			// btUser
 			// 
-			this.btUser.Location = new System.Drawing.Point(205, 9);
+			this.btUser.Location = new System.Drawing.Point(259, 9);
 			this.btUser.Name = "btUser";
 			this.btUser.Size = new System.Drawing.Size(23, 23);
 			this.btUser.TabIndex = 2;
@@ -191,7 +194,7 @@ namespace msql
 			// 
 			// btPassword
 			// 
-			this.btPassword.Location = new System.Drawing.Point(401, 9);
+			this.btPassword.Location = new System.Drawing.Point(455, 9);
 			this.btPassword.Name = "btPassword";
 			this.btPassword.Size = new System.Drawing.Size(23, 23);
 			this.btPassword.TabIndex = 4;
@@ -201,14 +204,14 @@ namespace msql
 			// 
 			// tbUser
 			// 
-			this.tbUser.Location = new System.Drawing.Point(116, 11);
+			this.tbUser.Location = new System.Drawing.Point(170, 11);
 			this.tbUser.Name = "tbUser";
 			this.tbUser.Size = new System.Drawing.Size(83, 20);
 			this.tbUser.TabIndex = 1;
 			// 
 			// label3
 			// 
-			this.label3.Location = new System.Drawing.Point(85, 15);
+			this.label3.Location = new System.Drawing.Point(138, 15);
 			this.label3.Name = "label3";
 			this.label3.Size = new System.Drawing.Size(41, 23);
 			this.label3.TabIndex = 5;
@@ -216,7 +219,7 @@ namespace msql
 			// 
 			// tbPassword
 			// 
-			this.tbPassword.Location = new System.Drawing.Point(307, 11);
+			this.tbPassword.Location = new System.Drawing.Point(361, 11);
 			this.tbPassword.Name = "tbPassword";
 			this.tbPassword.PasswordChar = '*';
 			this.tbPassword.Size = new System.Drawing.Size(88, 20);
@@ -224,7 +227,7 @@ namespace msql
 			// 
 			// label1
 			// 
-			this.label1.Location = new System.Drawing.Point(246, 14);
+			this.label1.Location = new System.Drawing.Point(300, 14);
 			this.label1.Name = "label1";
 			this.label1.Size = new System.Drawing.Size(100, 21);
 			this.label1.TabIndex = 1;
@@ -371,6 +374,17 @@ namespace msql
 			this.splitContainer1.SplitterDistance = 77;
 			this.splitContainer1.TabIndex = 1;
 			this.splitContainer1.TabStop = false;
+			// 
+			// btUncheckError
+			// 
+			this.btUncheckError.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Strikeout, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+			this.btUncheckError.Location = new System.Drawing.Point(80, 10);
+			this.btUncheckError.Name = "btUncheckError";
+			this.btUncheckError.Size = new System.Drawing.Size(52, 23);
+			this.btUncheckError.TabIndex = 13;
+			this.btUncheckError.Text = "Error";
+			this.btUncheckError.UseVisualStyleBackColor = true;
+			this.btUncheckError.Click += new System.EventHandler(this.BtUncheckErrorClick);
 			// 
 			// MainForm
 			// 
